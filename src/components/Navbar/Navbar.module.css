@@ -1,0 +1,25 @@
+
+.nav{
+    grid-area: n;
+    background: #9EACF3;
+    padding: 30px;
+}
+
+.item {
+    padding-bottom: 10px;
+    letter-spacing: 0.08em;
+}
+
+.item a{
+    color: white;
+    text-decoration: none;
+}
+
+.item a:hover {
+    color: darkred;
+}
+
+.item a.activeLink {
+    color: #4f0a0a;
+    text-shadow: 1px 1px 7px #4f0a0a;
+}
