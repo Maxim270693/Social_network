@@ -12,9 +12,8 @@ import {RootStateType} from "./redux/state";
 
 
 type PropsType = {
-    addPost: (postMessage: string) => void
+    dispatch: (action: any) => void
     appState: RootStateType
-    changeNewText: (newText: string) => void
     newPostText: string
 }
 
@@ -30,8 +29,8 @@ function App(props: PropsType) {
                 <Route path='/profile'
                        render={() => <Profile
                            profilePage={props.appState.profilePage}
-                           addPost={props.addPost}
-                           changeNewText={props.changeNewText}
+                           dispatch={props.dispatch}
+                           // changeNewText={props.changeNewText}
                            newPostText={props.newPostText}
                        />}/>
                 <Route path='/news' render={() => <News/>}/>

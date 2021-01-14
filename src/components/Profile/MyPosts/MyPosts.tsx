@@ -1,14 +1,43 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {addPostActionCreator, ChangeNewTextActionCreator, PostType} from "../../../redux/state";
 
 type postType = {
     posts: Array<PostType>
-    addPost: (postMessage: string) => void
-    changeNewText: (newText: string) => void
+    dispatch: (action: any) => void
     newPostText: string
 }
+
+type AddPostType = {
+    type: 'ADD-POST'
+}
+
+type ChangeTextType = {
+    type: 'CHANGE-NEW-TEXT'
+    newText: string
+}
+
+export type ActionType = AddPostType | ChangeTextType
+
+
+
+
+// export const addPostActionCreator = () => {
+//      const ADD_POST = 'ADD-POST'     // в state выносится на самый вверх
+//          return {
+//              type:ADD_POST
+//          }
+//}
+
+
+
+
+// const ChangeNewTextActionCreator = () => {               // 17.25
+//     const CHANGE_NEW_TEXT =  'CHANGE-NEW-TEXT'
+//     return { type:  CHANGE_NEW_TEXT, newText: text}
+// }
+
 
 function MyPosts(props: postType) {
 
@@ -16,12 +45,12 @@ function MyPosts(props: postType) {
 
 
     function addPost() {
-            props.addPost(props.newPostText)
-
+        props.dispatch(addPostActionCreator())
     }
 
     const changeNewText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeNewText(e.currentTarget.value)
+        let action = ChangeNewTextActionCreator(e.currentTarget.value);
+        props.dispatch(action)
     }
 
 
