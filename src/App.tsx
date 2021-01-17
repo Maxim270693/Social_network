@@ -8,16 +8,19 @@ import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import {RootStateType, StoreType} from "./redux/state";
 
 
 type PropsType = {
+    store: StoreType
     dispatch: (action: any) => void
     appState: RootStateType
     newPostText: string
 }
 
-function App(props: PropsType) {
+const App: React.FC<PropsType> = (props) => {
+
+    const state = props.store.getState
 
     return (
 
@@ -25,12 +28,14 @@ function App(props: PropsType) {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <Dialogs state={props.appState.dialogsPage}/>}/>
+                <Route path='/dialogs' render={() => <Dialogs
+                    state={props.appState.dialogsPage}
+                    store={props.store}
+                />}/>
                 <Route path='/profile'
                        render={() => <Profile
                            profilePage={props.appState.profilePage}
-                           dispatch={props.dispatch}
-                           // changeNewText={props.changeNewText}
+                           dispatch={props.store.dispatch.bind(props.store)}
                            newPostText={props.newPostText}
                        />}/>
                 <Route path='/news' render={() => <News/>}/>

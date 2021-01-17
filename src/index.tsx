@@ -7,12 +7,15 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
 
+
+
 const rerenderEntireTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <App appState={state}
                  dispatch={store.dispatch.bind(store)}
                  newPostText={store._state.profilePage.newPostText}
+                 store={store}
             />
         </BrowserRouter>, document.getElementById('root')
     );
