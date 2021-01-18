@@ -4,9 +4,9 @@ import {Post} from "./Post/Post";
 import {
     addPostActionCreator,
     ChangeNewTextActionCreator,
-    PostType, SendMessageCreator,
-    updateNewMessageBodyCreator
-} from "../../../redux/state";
+} from "../../../redux/profile-reducer";
+import {PostType} from "../../../redux/state";
+import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
 
 type postType = {
     posts: Array<PostType>

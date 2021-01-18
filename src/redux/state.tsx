@@ -1,9 +1,8 @@
 import {ActionType} from "../components/Profile/MyPosts/MyPosts";
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
 
-const ADD_POST = 'ADD-POST';
-const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
-const CHANGE_NEW_MESSAGE_BODY = 'CHANGE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
+
 
 
 export type StoreType = {
@@ -40,7 +39,8 @@ let store: StoreType = {
                 {id: 5, message: 'Welcome'}
             ],
             newMessageBody: ''
-        }
+        },
+        // sidebar: {}
     },
     _callSubscriber() {
         console.log('State changed')
@@ -53,38 +53,16 @@ let store: StoreType = {
     },
 
     dispatch(action: ActionType) {
-        if (action.type === ADD_POST) {
-            const newPost: PostType = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                like: 32
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state);
-        } else if (action.type === CHANGE_NEW_TEXT) {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state);
-        } else if (action.type === CHANGE_NEW_MESSAGE_BODY) {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            let body = this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody = ''
-            this._state.dialogsPage.messages.push({id: 6, message: body})
-            this._callSubscriber(this._state);
-        }
+
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+
+
+        this._callSubscriber(this._state);
+
     }
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST}) as const
-export const ChangeNewTextActionCreator = (newText: string) =>
-    ({type: CHANGE_NEW_TEXT, newText: newText}) as const
-
-export const SendMessageCreator = () => ({type: SEND_MESSAGE}) as const
-export const updateNewMessageBodyCreator = (body: string) =>
-    ({type: CHANGE_NEW_MESSAGE_BODY, body: body}) as const
-
 
 export type MessageType = {
     id: number

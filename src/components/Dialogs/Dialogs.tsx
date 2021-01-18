@@ -2,7 +2,8 @@ import React, {ChangeEvent} from 'react'
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css'
 import MessageItem from './Message/Message';
-import {DialogsPageType, SendMessageCreator, StoreType, updateNewMessageBodyCreator} from "../../redux/state";
+import { SendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
+import {DialogsPageType, StoreType} from "../../redux/state";
 
 
 

@@ -1,7 +1,10 @@
 import React from "react";
 import s from './../Dialogs.module.css'
 
-
+export type messagesType = {
+    id: number
+    message:string
+}
 
 
 function MessageItem(props: messagesType) {
@@ -23,9 +26,6 @@ function MessageItem(props: messagesType) {
     )
 }
 
-export type messagesType = {
-    id: number
-    message:string
-}
+
 
 export default MessageItem;
