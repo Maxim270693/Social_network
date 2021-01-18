@@ -1,9 +1,10 @@
 import {PostType, ProfilePageType} from "./state";
+import {ActionType} from "../components/Profile/MyPosts/MyPosts";
 
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
 
-const profileReducer = (state: ProfilePageType,action: any) => {
+const profileReducer = (state: ProfilePageType,action: ActionType) => {
     switch (action.type) {
         case ADD_POST:const newPost: PostType = {
             id: 5,

@@ -1,9 +1,12 @@
+import {ActionType} from "../components/Profile/MyPosts/MyPosts";
+import {DialogsPageType} from "./state";
 
 
 const CHANGE_NEW_MESSAGE_BODY = 'CHANGE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
-const dialogsReducer = (state:any,action: any) => {
+
+const dialogsReducer = (state:DialogsPageType,action: ActionType) => {
     switch (action.type) {
         case CHANGE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.body
