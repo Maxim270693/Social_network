@@ -1,38 +1,29 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {
-    addPostActionCreator,
-    ChangeNewTextActionCreator,
-} from "../../../redux/profile-reducer";
-import {PostType} from "../../../redux/state";
-import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
+import {PostType} from "../../../redux/store";
 
 type postType = {
     posts: Array<PostType>
-    dispatch: (action: any) => void
     newPostText: string
+    addPost: ()=> void
+    updateNewPostText: (value: string)=> void
 }
 
-export type ActionType =
-    ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof ChangeNewTextActionCreator>
-    | ReturnType<typeof updateNewMessageBodyCreator>
-    | ReturnType<typeof SendMessageCreator>
-
-
 function MyPosts(props: postType) {
+
+    debugger
 
     let postsElement = props.posts.map(p => <Post message={p.message} like={p.like}/>)
 
 
-    function addPost() {
-        props.dispatch(addPostActionCreator())
+    function onAddPost() {
+        props.addPost()
     }
 
-    const changeNewText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let action = ChangeNewTextActionCreator(e.currentTarget.value);
-        props.dispatch(action)
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value
+        props.updateNewPostText(text)
     }
 
 
@@ -41,11 +32,11 @@ function MyPosts(props: postType) {
             <h3>my posts</h3>
             <div className={s.item}>
                 <div>
-                    <textarea onChange={changeNewText}
+                    <textarea onChange={onPostChange}
                               value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add Post</button>
+                    <button onClick={onAddPost}>Add Post</button>
                 </div>
             </div>
             <div className={s.posts}>

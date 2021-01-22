@@ -3,24 +3,23 @@ import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType, StoreType} from "./redux/state";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {StoreTypeRedux} from "./redux/redux-store";
 
 
 type PropsType = {
-    store: StoreType
+    store: StoreTypeRedux
     dispatch: (action: any) => void
-    appState: RootStateType
     newPostText: string
 }
 
 const App: React.FC<PropsType> = (props) => {
 
-    const state = props.store.getState
+    const state = props.store.getState()
 
     return (
 
@@ -28,15 +27,16 @@ const App: React.FC<PropsType> = (props) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <Dialogs
-                    state={props.appState.dialogsPage}
+                <Route path='/dialogs' render={() => <DialogsContainer
+                    // dialogsPage={state.dialogsPage}
                     store={props.store}
                 />}/>
                 <Route path='/profile'
                        render={() => <Profile
-                           profilePage={props.appState.profilePage}
-                           dispatch={props.store.dispatch.bind(props.store)}
-                           newPostText={props.newPostText}
+                           // profilePage={state.profilePage}
+                           // dispatch={props.dispatch}
+                           // newPostText={props.newPostText}
+                           store={props.store}
                        />}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>

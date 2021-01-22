@@ -1,6 +1,7 @@
-import {ActionType} from "../components/Profile/MyPosts/MyPosts";
+
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
+import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 
 
 
@@ -53,14 +54,10 @@ let store: StoreType = {
     },
 
     dispatch(action: ActionType) {
-
-
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
-
         this._callSubscriber(this._state);
-
     }
 }
 
