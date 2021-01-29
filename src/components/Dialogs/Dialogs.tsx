@@ -7,7 +7,7 @@ import {StoreTypeRedux} from "../../redux/redux-store";
 
 
 type PropsType = {
-    store: StoreTypeRedux
+    // store: StoreTypeRedux
     dialogsPage: DialogsPageType
     updateNewMessageBody: (body: string) => void
     sendMessage: ()=>void

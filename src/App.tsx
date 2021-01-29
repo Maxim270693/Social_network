@@ -12,14 +12,14 @@ import {StoreTypeRedux} from "./redux/redux-store";
 
 
 type PropsType = {
-    store: StoreTypeRedux
-    dispatch: (action: any) => void
-    newPostText: string
+    // store: StoreTypeRedux
+    // dispatch: (action: any) => void
+    // newPostText: string
 }
 
 const App: React.FC<PropsType> = (props) => {
 
-    const state = props.store.getState()
+    // const state = props.store.getState()
 
     return (
 
@@ -29,14 +29,14 @@ const App: React.FC<PropsType> = (props) => {
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <DialogsContainer
                     // dialogsPage={state.dialogsPage}
-                    store={props.store}
+                    // store={props.store}
                 />}/>
                 <Route path='/profile'
                        render={() => <Profile
                            // profilePage={state.profilePage}
                            // dispatch={props.dispatch}
                            // newPostText={props.newPostText}
-                           store={props.store}
+                           // store={props.store}
                        />}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>

@@ -5,15 +5,19 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import store, {AllStateType} from './redux/redux-store';
+import {Provider} from "react-redux";
 
 
 const rerenderEntireTree = (state: AllStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-                <App dispatch={store.dispatch.bind(store)}
-                     newPostText={state.profilePage.newPostText}
-                     store={store}
+            <Provider store={store}>
+                <App
+                    // dispatch={store.dispatch.bind(store)}
+                    //  newPostText={state.profilePage.newPostText}
+                    //  store={store}
                 />
+            </Provider>
         </BrowserRouter>, document.getElementById('root')
     );
 }

@@ -8,6 +8,8 @@ let reducers = combineReducers({
 });
 
 let store = createStore(reducers)
+
+
 export type AllStateType = ReturnType<typeof reducers>
 export type StoreTypeRedux = typeof store
 
