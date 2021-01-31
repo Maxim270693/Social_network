@@ -6,26 +6,26 @@ const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
 
 let initialState = {
-        posts: [
-            {id: 1, message: 'Hi how are you?', like: 12},
-            {id: 2, message: "It's my first post", like: 1}
-        ],
-        newPostText: ' '
-    }
+    posts: [
+        {id: 1, message: 'Hi how are you?', like: 12},
+        {id: 2, message: "It's my first post", like: 1}
+    ],
+    newPostText: ''
+}
 
-const profileReducer = (state: ProfilePageType = initialState,action: ActionType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
-        case ADD_POST:const newPost: PostType = {
-            id: 5,
-            message: state.newPostText,
-            like: 32
-        };
-            state.posts.push(newPost)
-            state.newPostText = '';
-            return state
-        case CHANGE_NEW_TEXT:
-            state.newPostText = action.newText
-            return state
+        case ADD_POST: {
+            const newPost: PostType = {
+                id: 5,
+                message: state.newPostText,
+                like: 32
+            };
+            return {...state,posts: [...state.posts,newPost],newPostText: '' }
+        }
+        case CHANGE_NEW_TEXT: {
+            return {...state,newPostText: action.newText}
+        }
         default:
             return state
     }

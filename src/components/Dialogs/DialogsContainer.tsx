@@ -4,31 +4,11 @@ import Dialogs from "./Dialogs";
 import {StoreTypeRedux} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {RootStateType} from "../../redux/store";
+import {Dispatch} from "redux";
 
-
-export type PropsType = {
-    store: StoreTypeRedux
-}
-
-
-// function DialogsContainer(props:PropsType) {
 //
-//     let state = props.store.getState().dialogsPage
-//
-//     let onSendMessageClick = () => {
-//         props.store.dispatch(SendMessageCreator())
-//     }
-//     let onNewMessageChange = (body: string) => {
-//         props.store.dispatch(updateNewMessageBodyCreator(body))
-//     }
-//
-//     return (
-//         <Dialogs store={props.store}
-//                  updateNewMessageBody={onNewMessageChange}
-//                  sendMessage={onSendMessageClick}
-//                  dialogsPage={state}
-//         />
-//     )
+// export type PropsType = {
+//     store: StoreTypeRedux
 // }
 
 
@@ -39,7 +19,7 @@ let mapStateToProps = (state:RootStateType) => {
     }
 }
 
-let mapDispatchToProps = (dispatch: any) => {     // dispatch: any - error!!!
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body))

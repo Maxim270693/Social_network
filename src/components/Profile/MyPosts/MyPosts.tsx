@@ -12,10 +12,7 @@ type postType = {
 
 function MyPosts(props: postType) {
 
-    debugger
-
-    let postsElement = props.posts.map(p => <Post message={p.message} like={p.like}/>)
-
+    let postsElement = props.posts.map(p => <Post message={p.message} key={p.id} like={p.like}/>)
 
     function onAddPost() {
         props.addPost()
