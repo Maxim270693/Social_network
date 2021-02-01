@@ -4,8 +4,6 @@ import dialogsReducer from "./dialogs-reducer";
 import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 
 
-
-
 export type StoreType = {
     _state: RootStateType
     subscribe: any

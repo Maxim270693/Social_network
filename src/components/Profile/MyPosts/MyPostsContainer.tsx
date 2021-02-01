@@ -5,6 +5,7 @@ import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/di
 import {connect} from "react-redux";
 import {RootStateType} from "../../../redux/store";
 import {Dispatch} from "redux";
+import {followAC, setUsersAC, unfollowAC} from "../../../redux/users-reducer";
 
 // type postType = {
 //     // store: StoreTypeRedux
@@ -15,6 +16,9 @@ export type ActionType =
     | ReturnType<typeof ChangeNewTextActionCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof SendMessageCreator>
+    | ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
 
 
 let mapStateToProps = (state: RootStateType) => {

@@ -8,18 +8,12 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import {StoreTypeRedux} from "./redux/redux-store";
-
+import UsersContainer from "./components/Users/UsersContainer";
 
 type PropsType = {
-    // store: StoreTypeRedux
-    // dispatch: (action: any) => void
-    // newPostText: string
 }
 
 const App: React.FC<PropsType> = (props) => {
-
-    // const state = props.store.getState()
 
     return (
 
@@ -27,17 +21,9 @@ const App: React.FC<PropsType> = (props) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <DialogsContainer
-                    // dialogsPage={state.dialogsPage}
-                    // store={props.store}
-                />}/>
-                <Route path='/profile'
-                       render={() => <Profile
-                           // profilePage={state.profilePage}
-                           // dispatch={props.dispatch}
-                           // newPostText={props.newPostText}
-                           // store={props.store}
-                       />}/>
+                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                <Route path='/profile' render={() => <Profile/>}/>
+                <Route path='/users' render={() => <UsersContainer/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
