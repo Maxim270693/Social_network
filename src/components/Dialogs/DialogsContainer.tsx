@@ -1,21 +1,15 @@
 import React from 'react'
 import {SendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
-import {StoreTypeRedux} from "../../redux/redux-store";
+import {AllStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/store";
 import {Dispatch} from "redux";
 
-//
-// export type PropsType = {
-//     store: StoreTypeRedux
-// }
 
 
-let mapStateToProps = (state:RootStateType) => {
+let mapStateToProps = (state:AllStateType) => {
     return {
         dialogsPage: state.dialogsPage,
-        // store: store
     }
 }
 

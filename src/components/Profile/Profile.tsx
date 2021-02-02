@@ -10,9 +10,7 @@ function Profile(props: profilePostsType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer
-                // store={props.store}
-            />
+            <MyPostsContainer/>
         </div>
     );
 }

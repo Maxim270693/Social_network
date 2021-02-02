@@ -3,13 +3,10 @@ import {addPostActionCreator, ChangeNewTextActionCreator,} from "../../../redux/
 import MyPosts from "./MyPosts";
 import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
-import {RootStateType} from "../../../redux/store";
 import {Dispatch} from "redux";
 import {followAC, setUsersAC, unfollowAC} from "../../../redux/users-reducer";
+import {AllStateType} from "../../../redux/redux-store";
 
-// type postType = {
-//     // store: StoreTypeRedux
-// }
 
 export type ActionType =
     ReturnType<typeof addPostActionCreator>
@@ -21,7 +18,16 @@ export type ActionType =
     | ReturnType<typeof setUsersAC>
 
 
-let mapStateToProps = (state: RootStateType) => {
+type mapStateToPropsType = {
+
+}
+
+type mapDispatchToPropsType = {
+    updateNewPostText: (value: string) => void
+    addPost: () => void
+}
+
+let mapStateToProps = (state: AllStateType) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText

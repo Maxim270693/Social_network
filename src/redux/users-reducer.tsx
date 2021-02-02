@@ -26,32 +26,7 @@ export type usersPropsType = {
 
 
 let initialState = {
-    users: [
-        {
-            id: 1,
-            photoUrl: 'https://images.pexels.com/photos/3031396/pexels-photo-3031396.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-            followed: false,
-            fullName: 'Julia',
-            status: 'I am a sister',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            photoUrl: 'https://i.pinimg.com/236x/a6/d0/87/a6d087f3ee63e499977841d2a90a53e6.jpg',
-            followed: true,
-            fullName: 'Vlad',
-            status: 'I am a friend',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: 3,
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaXrFMnQrS3cdGFTB-UpG-5qMGMQyybPu7xg&usqp=CAU',
-            followed: false,
-            fullName: 'Yura',
-            status: 'I am a friend too',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        },
-    ]
+    users: [ ]
 }
 
 export const usersReducer = (state: usersPropsType = initialState, action: ActionType) => {
@@ -77,7 +52,7 @@ export const usersReducer = (state: usersPropsType = initialState, action: Actio
                 })
             }
         case SET_USERS:
-            return {...state,users: [...state.users,...action.users.users]}
+            return {...state,users: [...state.users,...action.users]}
         default:
             return state
     }
@@ -86,4 +61,4 @@ export const usersReducer = (state: usersPropsType = initialState, action: Actio
 
 export const followAC = (userId: number) => ({type: FOLLOW, userId}) as const
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId}) as const
-export const setUsersAC = (users: usersPropsType) => ({type: SET_USERS, users}) as const
+export const setUsersAC = (users:  usersType[]) => ({type: SET_USERS, users}) as const // actioncreator function которая возвращает объект action
