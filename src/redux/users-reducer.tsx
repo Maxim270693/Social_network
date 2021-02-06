@@ -5,19 +5,22 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 
-type LocationType = {
-    city: string
-    country: string
-}
+// type LocationType = {
+//     city: string
+//     country: string
+// }
 
 export type usersType = {
     id: number
-    photoUrl: string
+    photos: {
+        small: string
+        large: string
+    }
     followed: boolean
-    fullName: string
+    name: string
     status: string
-    location: LocationType
-
+    uniqueUrlName: string
+    // location: LocationType
 }
 
 export type usersPropsType = {
@@ -61,4 +64,4 @@ export const usersReducer = (state: usersPropsType = initialState, action: Actio
 
 export const followAC = (userId: number) => ({type: FOLLOW, userId}) as const
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId}) as const
-export const setUsersAC = (users:  usersType[]) => ({type: SET_USERS, users}) as const // actioncreator function которая возвращает объект action
+export const setUsersAC = (users:  usersType[]) => ({type: SET_USERS, users}) as const // actionCreator function которая возвращает объект action

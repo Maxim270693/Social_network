@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {followAC, setUsersAC, unfollowAC} from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
+import {PostType} from "../../../redux/store";
 
 
 export type ActionType =
@@ -19,7 +20,8 @@ export type ActionType =
 
 
 type mapStateToPropsType = {
-
+    posts:Array<PostType>
+    newPostText: string
 }
 
 type mapDispatchToPropsType = {
@@ -27,13 +29,13 @@ type mapDispatchToPropsType = {
     addPost: () => void
 }
 
-let mapStateToProps = (state: AllStateType) => {
+let mapStateToProps = (state: AllStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         updateNewPostText: (value: string) => {
             let action = ChangeNewTextActionCreator(value);
