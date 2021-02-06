@@ -2,7 +2,7 @@ import React from "react";
 import {usersType} from "../../redux/users-reducer";
 import styles from './Users.module.css'
 import axios from "axios";
-import userPhoto from '../../assets/images/images.png'
+import userPhoto from '../../assets/images/users.png'
 
 export type mapStateToPropsType = {
     users: Array<usersType>
@@ -17,17 +17,18 @@ export type mapDispatchToPropsType = {
 type PropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export function Users(props: PropsType) {
-
-    if (props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                props.setUsers(response.data.items)
-            })
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+        }
     }
-
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {
                 props.users.map((u: usersType) => <div key={u.id}>
                     <span>
