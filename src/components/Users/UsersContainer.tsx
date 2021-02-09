@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Users} from "./Users";
 import {Dispatch} from "redux";
 import {followAC, setUsersAC, unfollowAC, usersType} from "../../redux/users-reducer";
 import {AllStateType} from "../../redux/redux-store";
+import Users from "./Users";
 
 
 type mapStateToPropsType = {
