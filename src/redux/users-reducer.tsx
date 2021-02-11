@@ -3,12 +3,9 @@ import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
-
-// type LocationType = {
-//     city: string
-//     country: string
-// }
 
 export type usersType = {
     id: number
@@ -20,19 +17,24 @@ export type usersType = {
     name: string
     status: string
     uniqueUrlName: string
-    // location: LocationType
+    initialState: initialStatePropsType
 }
 
-export type usersPropsType = {
+type initialStatePropsType = {
     users: Array<usersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
-
 
 let initialState = {
-    users: [ ]
+    users: [ ],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
-export const usersReducer = (state: usersPropsType = initialState, action: ActionType) => {
+export const usersReducer = (state:initialStatePropsType = initialState, action: ActionType): initialStatePropsType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -55,13 +57,30 @@ export const usersReducer = (state: usersPropsType = initialState, action: Actio
                 })
             }
         case SET_USERS:
-            return {...state,users: [...state.users,...action.users]}
+            return {
+                ...state,
+                users: action.users
+            }
+
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+            case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.count
+            }
+
         default:
             return state
     }
 
 }
 
-export const followAC = (userId: number) => ({type: FOLLOW, userId}) as const
-export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId}) as const
-export const setUsersAC = (users:  usersType[]) => ({type: SET_USERS, users}) as const // actionCreator function которая возвращает объект action
+export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
+export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
+export const setUsersAC = (users:  usersType[]) => ({type: SET_USERS, users} as const)  // actionCreator function которая возвращает объект action
+export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
+export const setUsersTotalCountAC = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, count:totalUsersCount} as const)

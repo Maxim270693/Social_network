@@ -4,7 +4,7 @@ import MyPosts from "./MyPosts";
 import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {followAC, setUsersAC, unfollowAC} from "../../../redux/users-reducer";
+import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
 import {PostType} from "../../../redux/store";
 
@@ -17,10 +17,12 @@ export type ActionType =
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setUsersTotalCountAC>
 
 
 type mapStateToPropsType = {
-    posts:Array<PostType>
+    posts: Array<PostType>
     newPostText: string
 }
 
@@ -48,8 +50,7 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 }
 
 
-
-const MyPostsContainer = connect(mapStateToProps,mapDispatchToProps) (MyPosts);
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 
 export default MyPostsContainer;
