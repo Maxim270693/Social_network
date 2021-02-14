@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPostActionCreator, ChangeNewTextActionCreator,} from "../../../redux/profile-reducer";
+import {addPostActionCreator, ChangeNewTextActionCreator, setUserProfile,} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
@@ -27,6 +27,7 @@ export type ActionType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfile>
 
 
 type mapStateToPropsType = {

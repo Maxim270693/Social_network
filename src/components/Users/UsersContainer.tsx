@@ -12,7 +12,6 @@ import {
 import {AllStateType} from "../../redux/redux-store";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from "../../assets/images/preloader1.png" // тут ли правильно?
 import {Preloader} from "../common/preloader/Preloader";
 
 
@@ -71,7 +70,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader preloader={preloader}/> : null}    {/*надо ли передовать пропс preloader в Preloader?*/}
+            {this.props.isFetching ? <Preloader /> : null}
             <Users
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
