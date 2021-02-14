@@ -4,7 +4,14 @@ import MyPosts from "./MyPosts";
 import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from "../../../redux/users-reducer";
+import {
+    follow,
+    setCurrentPage,
+    setUsers,
+    setTotalUsersCount,
+    toggleIsFetching,
+    unfollow
+} from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
 import {PostType} from "../../../redux/store";
 
@@ -14,11 +21,12 @@ export type ActionType =
     | ReturnType<typeof ChangeNewTextActionCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof SendMessageCreator>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setUsersTotalCountAC>
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
 
 
 type mapStateToPropsType = {
