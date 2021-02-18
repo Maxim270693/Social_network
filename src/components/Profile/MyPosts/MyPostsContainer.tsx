@@ -7,13 +7,14 @@ import {Dispatch} from "redux";
 import {
     follow,
     setCurrentPage,
-    setUsers,
     setTotalUsersCount,
+    setUsers,
     toggleIsFetching,
     unfollow
 } from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
 import {PostType} from "../../../redux/store";
+import {setAuthUserData} from "../../../redux/auth-reducer";
 
 
 export type ActionType =
@@ -28,6 +29,7 @@ export type ActionType =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setAuthUserData>
 
 
 type mapStateToPropsType = {
