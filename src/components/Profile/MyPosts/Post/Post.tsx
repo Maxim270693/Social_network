@@ -1,5 +1,4 @@
 import React from 'react';
-// import './Profile.module.css'
 import s from './Post.module.css'
 
 type PropsType = {

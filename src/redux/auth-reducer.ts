@@ -1,4 +1,6 @@
 import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = "SET-USER-DATA"
 
@@ -53,7 +55,16 @@ export const authReducer = (state: InitialStatePropsType = initialState, action:
     }
 }
 
-export const setAuthUserData = (userId:null |  number, email:null | string, login:null | string) => ({
+export const setAuthUserData = (userId:null | number, email:null | string, login:null | string) => ({
     type: SET_USER_DATA,
     data: {userId, email, login}
 } as const)
+export const getAuthUserData = () => (dispatch:Dispatch) => {
+    authAPI.me()
+        .then(response => {
+            if( response.data.resultCode === 0) {
+                let {id, email, login} = response.data.data
+                dispatch(setAuthUserData(id,email,login))
+            }
+        })
+}

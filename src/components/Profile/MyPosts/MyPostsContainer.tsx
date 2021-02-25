@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {
     followSuccess,
-    //getUsers,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
