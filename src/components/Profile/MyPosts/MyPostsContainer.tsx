@@ -5,12 +5,14 @@ import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/di
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {
-    follow,
+    followSuccess,
+    //getUsers,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toggleFollowingProgress,
+    setUsers,
+    toggleFollowingProgress,
     toggleIsFetching,
-    unfollow
+    unfollowSuccess
 } from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
 import {PostType} from "../../../redux/store";
@@ -22,8 +24,8 @@ export type ActionType =
     | ReturnType<typeof ChangeNewTextActionCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof SendMessageCreator>
-    | ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
