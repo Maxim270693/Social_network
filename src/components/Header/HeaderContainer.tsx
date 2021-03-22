@@ -9,20 +9,16 @@ type MapStateToPropsType = {
     isAuth: null | boolean
     login: null | string
 }
-
 type MapDispatchToPropsType = {
     getAuthUserData:() => void
 }
-
 type ClassType = MapStateToPropsType & MapDispatchToPropsType
 
 
 class HeadersContainer extends React.Component <ClassType, {}> {
-
     componentDidMount() {
         this.props.getAuthUserData()
     }
-
     render() {
         return <Header {...this.props}/>
     }

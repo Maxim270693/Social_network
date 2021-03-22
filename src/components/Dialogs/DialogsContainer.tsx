@@ -10,6 +10,7 @@ import {Dispatch} from "redux";
 let mapStateToProps = (state:AllStateType) => {
     return {
         dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

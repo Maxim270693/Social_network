@@ -77,6 +77,7 @@ const profileReducer = (state: initialStatePropsType = initialState, action: Act
 
 export const addPostActionCreator = () => ({type: ADD_POST}  as const)
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
+
 export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
     userAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response.data))
