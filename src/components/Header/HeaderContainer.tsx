@@ -26,7 +26,6 @@ class HeadersContainer extends React.Component <ClassType, {}> {
     render() {
         return <Header {...this.props}/>
     }
-
 }
 
 const mapStateToProps = (state: AllStateType): MapStateToPropsType => ({

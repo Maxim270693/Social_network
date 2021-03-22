@@ -2,7 +2,7 @@ import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 
-const SET_USER_DATA = "SET-USER-DATA"
+export const SET_USER_DATA = "SET-USER-DATA"
 
 type FieldsErrorsType = {
     fieldsErrors: []
@@ -12,7 +12,7 @@ type MessagesType = {
     messages: []
 }
 
-type DataType = {
+export type DataType = {
     data: InitialStatePropsType
     messages: MessagesType
     fieldsErrors: FieldsErrorsType

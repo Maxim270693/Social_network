@@ -11,8 +11,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import { HeaderContainer } from './components/Header/HeaderContainer';
 
 
-type PropsType = {
-}
+type PropsType = {}
 
 const App: React.FC<PropsType> = (props) => {
 

@@ -21,8 +21,8 @@ export type usersType = {
     name: string
     status: string
     uniqueUrlName: string
-    initialState: initialStatePropsType
 }
+
 
 export type initialStatePropsType = {
     users: Array<usersType>
@@ -34,6 +34,7 @@ export type initialStatePropsType = {
 }
 
 export type FollowingInProgressType = {}
+
 
 let initialState = {
     users: [],
