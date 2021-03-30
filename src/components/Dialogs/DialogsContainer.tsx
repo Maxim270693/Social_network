@@ -3,13 +3,12 @@ import {SendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialo
 import Dialogs, {DialogsType} from "./Dialogs";
 import {AllStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 export type MapStatePropsType = {
     dialogsPage: DialogsType
-    //isAuth: boolean | null
 }
 
 export type MapDispatchToPropsType = {
@@ -23,7 +22,6 @@ export type PropsType = MapStatePropsType | MapDispatchToPropsType
 let mapStateToProps = (state:AllStateType): MapStatePropsType => {
     return {
         dialogsPage: state.dialogsPage,
-        //isAuth: state.auth.isAuth
     }
 }
 
@@ -38,9 +36,8 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs)
 
-const DialogsContainer = connect<MapStatePropsType,MapDispatchToPropsType, {}, AllStateType>(mapStateToProps,mapDispatchToProps) (AuthRedirectComponent)
-
-
-export default DialogsContainer;
+export default compose<React.ComponentType>(
+    connect<MapStatePropsType,MapDispatchToPropsType, {}, AllStateType>(mapStateToProps,mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);
