@@ -2,16 +2,31 @@ import React, {ChangeEvent} from 'react'
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css'
 import MessageItem from './Message/Message';
-import {DialogsPageType, DialogType, MessageType} from "../../redux/store";
 import { Redirect } from 'react-router-dom';
 
+export type MessageType = {
+    id: number
+    message: string
+}
 
-type PropsType = {
-    dialogsPage: DialogsPageType
+export type DialogType = {
+    name: string
+    id: number
+}
+
+export type DialogsType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageBody: string
+}
+
+export type PropsType = {
+    dialogsPage: DialogsType
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
     isAuth: boolean | null
 }
+
 
 
 function Dialogs(props:PropsType) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {addPostActionCreator, ChangeNewTextActionCreator, setUserProfile,} from "../../../redux/profile-reducer";
-import MyPosts from "./MyPosts";
+import MyPosts, {PostsType} from "./MyPosts";
 import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -14,7 +14,7 @@ import {
     unfollowSuccess
 } from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
-import {PostType} from "../../../redux/store";
+// import {PostType} from "../../../redux/store";
 import {setAuthUserData} from "../../../redux/auth-reducer";
 
 
@@ -35,7 +35,7 @@ export type ActionType =
 
 
 type mapStateToPropsType = {
-    posts: Array<PostType>
+    posts: Array<PostsType>
     newPostText: string
 }
 

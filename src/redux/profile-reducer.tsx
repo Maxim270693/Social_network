@@ -1,7 +1,8 @@
-import {PostType} from "./store";
+//import {PostType} from "./store";
 import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {Dispatch} from "redux";
 import {userAPI} from "../api/api";
+import {PostsType} from "../components/Profile/MyPosts/MyPosts";
 
 
 const ADD_POST = 'ADD-POST';
@@ -56,7 +57,7 @@ let initialState = {
 const profileReducer = (state: initialStatePropsType = initialState, action: ActionType): initialStatePropsType => {
     switch (action.type) {
         case ADD_POST: {
-            const newPost: PostType = {
+            const newPost: PostsType = {
                 id: 5,
                 message: state.newPostText,
                 like: 32

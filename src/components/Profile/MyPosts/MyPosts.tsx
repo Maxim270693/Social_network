@@ -1,10 +1,16 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/store";
 
-type postType = {
-    posts: Array<PostType>
+
+export type PostsType = {
+    id: number
+    message: string
+    like: number
+}
+
+export type postType = {
+    posts: Array<PostsType>
     newPostText: string
     addPost: ()=> void
     updateNewPostText: (value: string)=> void

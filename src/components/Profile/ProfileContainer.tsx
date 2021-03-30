@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 import {AllStateType} from "../../redux/redux-store";
 import {getUserProfile, ProfileType} from "../../redux/profile-reducer";
 import {Preloader} from "../common/preloader/Preloader";
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type PathParamsType = {
     userId: string
@@ -16,16 +17,16 @@ type OwnProps = {}
 
 type MapStateType = {
     profile: null | ProfileType,
-    isAuth: boolean | null
+    //isAuth: boolean | null
 }
 
 type MapDispatchType = {
-     getUserProfile: (userId: number) => void
+    getUserProfile: (userId: number) => void
 }
 
 type PropsType = OwnProps & MapStateType & MapDispatchType
 
-class ProfileContainer extends React.Component<CommonPropsType, AllStateType>{
+class ProfileContainer extends React.Component<CommonPropsType, AllStateType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
@@ -36,22 +37,21 @@ class ProfileContainer extends React.Component<CommonPropsType, AllStateType>{
     }
 
     render() {
-
-        if( !this.props.isAuth ) return <Redirect to='Login'/>
-
         return (
             <div>
-                {this.props.profile ? <Profile {...this.props} profile={this.props.profile}/> :  <Preloader/>}
+                {this.props.profile ? <Profile {...this.props} profile={this.props.profile}/> : <Preloader/>}
             </div>
         );
     }
 }
 
-let mapStateToProps = (state: AllStateType): MapStateType =>  ({
-    profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
+let mapStateToProps = (state: AllStateType) => ({
+    profile: state.profilePage.profile
 })
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 
-export default connect<MapStateType, MapDispatchType, OwnProps, AllStateType> (mapStateToProps, {getUserProfile}) (WithUrlDataContainerComponent);
+
+export default withAuthRedirect(connect<MapStateType, MapDispatchType, OwnProps, AllStateType>(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent));
