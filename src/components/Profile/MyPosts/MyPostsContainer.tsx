@@ -1,5 +1,10 @@
 import React from 'react';
-import {addPostActionCreator, ChangeNewTextActionCreator, setUserProfile,} from "../../../redux/profile-reducer";
+import {
+    addPostActionCreator,
+    ChangeNewTextActionCreator,
+    setStatus,
+    setUserProfile,
+} from "../../../redux/profile-reducer";
 import MyPosts, {PostsType} from "./MyPosts";
 import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
@@ -14,7 +19,6 @@ import {
     unfollowSuccess
 } from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
-// import {PostType} from "../../../redux/store";
 import {setAuthUserData} from "../../../redux/auth-reducer";
 
 
@@ -32,6 +36,7 @@ export type ActionType =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatus>
 
 
 type mapStateToPropsType = {

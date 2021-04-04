@@ -1,5 +1,3 @@
-
-//import {DialogsPageType} from "./store";
 import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {DialogsType} from "../components/Dialogs/Dialogs";
 
