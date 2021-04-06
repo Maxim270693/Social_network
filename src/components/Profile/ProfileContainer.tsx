@@ -6,6 +6,7 @@ import {getStatus, getUserProfile, ProfileType, updateStatus} from "../../redux/
 import {Preloader} from "../common/preloader/Preloader";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type PathParamsType = {
     userId: string
@@ -60,5 +61,5 @@ export default compose<React.ComponentType>(
         updateStatus
     }),
     withRouter,
-
+withAuthRedirect
 )(ProfileContainer)
