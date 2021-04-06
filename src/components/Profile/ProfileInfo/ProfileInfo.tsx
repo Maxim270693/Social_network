@@ -20,7 +20,9 @@ function ProfileInfo(props: ProfileInfoPropsType) {
             </div>
             <div className={s.descriptionBlock}>
                 <img src={imageUrl}/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatus status={props.status}
+                               updateStatus={props.updateStatus}
+                />
                 {/*ava + description*/}
             </div>
         </div>

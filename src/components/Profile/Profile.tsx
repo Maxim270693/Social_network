@@ -12,7 +12,10 @@ export type profilePostsType = {
 function Profile(props: profilePostsType) {
     return (
         <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo profile={props.profile}
+                         status={props.status}
+                         updateStatus={props.updateStatus}
+            />
             <MyPostsContainer/>
         </div>
     );
