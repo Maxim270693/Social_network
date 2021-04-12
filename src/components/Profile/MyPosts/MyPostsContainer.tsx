@@ -6,7 +6,7 @@ import {
     setUserProfile,
 } from "../../../redux/profile-reducer";
 import MyPosts, {PostsType} from "./MyPosts";
-import {SendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
+import {SendMessageCreator} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {
@@ -25,7 +25,6 @@ import {setAuthUserData} from "../../../redux/auth-reducer";
 export type ActionType =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof ChangeNewTextActionCreator>
-    | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof SendMessageCreator>
     | ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>
@@ -41,28 +40,26 @@ export type ActionType =
 
 type mapStateToPropsType = {
     posts: Array<PostsType>
-    newPostText: string
+    // newPostText: string
 }
 
 type mapDispatchToPropsType = {
-    updateNewPostText: (value: string) => void
-    addPost: () => void
+    addPost: (newPostText:string) => void
 }
+
+export type MyPostsPropsType = mapStateToPropsType | mapDispatchToPropsType
+
 
 let mapStateToProps = (state: AllStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        // newPostText: state.profilePage.newPostText
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        updateNewPostText: (value: string) => {
-            let action = ChangeNewTextActionCreator(value);
-            dispatch(action)
-        },
-        addPost: () => {
-            dispatch(addPostActionCreator())
+        addPost: (newPostText: string) => {
+            dispatch(addPostActionCreator(newPostText))
         }
     }
 }

@@ -17,7 +17,7 @@ type PostPropsType = {
 
 type initialStatePropsType = {
     posts: Array<PostPropsType>
-    newPostText: string
+    //newPostText: string
     profile: null | ProfileType
     status: string
 }
@@ -51,7 +51,6 @@ let initialState = {
         {id: 1, message: 'Hi how are you?', like: 12},
         {id: 2, message: "It's my first post", like: 1}
     ],
-    newPostText: '',
     profile: null,
     status: ""
 }
@@ -61,13 +60,10 @@ const profileReducer = (state: initialStatePropsType = initialState, action: Act
         case ADD_POST: {
             const newPost: PostsType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 like: 32
             };
-            return {...state,posts: [...state.posts,newPost],newPostText: '' }
-        }
-        case CHANGE_NEW_TEXT: {
-            return {...state,newPostText: action.newText}
+            return {...state,posts: [...state.posts,newPost] }
         }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
@@ -81,7 +77,7 @@ const profileReducer = (state: initialStatePropsType = initialState, action: Act
 
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}  as const)
+export const addPostActionCreator = (newPostText:string) => ({type: ADD_POST,newPostText}  as const)
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 

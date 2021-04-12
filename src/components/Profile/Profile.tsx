@@ -16,7 +16,7 @@ function Profile(props: profilePostsType) {
                          status={props.status}
                          updateStatus={props.updateStatus}
             />
-            <MyPostsContainer/>
+            <MyPostsContainer  />
         </div>
     );
 }
