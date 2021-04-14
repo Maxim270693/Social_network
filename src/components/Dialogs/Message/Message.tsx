@@ -8,14 +8,6 @@ export type messagesType = {
 
 
 function MessageItem(props: messagesType) {
-
-    // let postElement = React.createRef<HTMLTextAreaElement>()
-
-    // let addNewMessage = () => {
-    //     let text = postElement.current?.value
-    //     alert(text)
-    // }
-
     return (
         <div>
             <div className={s.message}>{props.message}</div>
