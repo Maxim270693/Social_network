@@ -19,6 +19,7 @@ type OwnProps = {}
 type MapStateType = {
     profile: null | ProfileType
     status: string
+    authorizedUserId: string
 }
 
 type MapDispatchType = {
@@ -34,7 +35,7 @@ class ProfileContainer extends React.Component<CommonPropsType, AllStateType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = "14465"
+            userId = this.props.authorizedUserId
         }
         this.props.getUserProfile(+userId)
         this.props.getStatus(+userId)
@@ -51,7 +52,9 @@ class ProfileContainer extends React.Component<CommonPropsType, AllStateType> {
 
 let mapStateToProps = (state: AllStateType) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<React.ComponentType>(
