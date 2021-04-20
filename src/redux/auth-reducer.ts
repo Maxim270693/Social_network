@@ -3,7 +3,7 @@ import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AllStateType} from "./redux-store";
 import {stopSubmit} from "redux-form";
-import {Dispatch} from "redux";
+
 
 export const SET_USER_DATA = "SET-USER-DATA"
 
@@ -38,7 +38,7 @@ let initialState = {
     authorizedUserId: null
 }
 
-export const authReducer = (state: InitialStatePropsType = initialState, action: ActionType): InitialStatePropsType => {
+export const isAuthReducer = (state: InitialStatePropsType = initialState, action: ActionType): InitialStatePropsType => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {...state, ...action.payload}
@@ -53,7 +53,7 @@ export const setAuthUserData = (userId: string, email: null | string, login: nul
     payload: {userId, email, login, isAuth}
 } as const)
 export const getAuthUserData = () => (dispatch: ThunkDispatch<AllStateType, unknown, ActionType>) => {
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data

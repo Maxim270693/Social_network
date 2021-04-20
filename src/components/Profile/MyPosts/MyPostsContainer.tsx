@@ -20,6 +20,7 @@ import {
 } from "../../../redux/users-reducer";
 import {AllStateType} from "../../../redux/redux-store";
 import {setAuthUserData} from "../../../redux/auth-reducer";
+import {initializedSuccess} from "../../../redux/app-reducer";
 
 
 export type ActionType =
@@ -36,24 +37,23 @@ export type ActionType =
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof initializedSuccess>
 
 
 type mapStateToPropsType = {
     posts: Array<PostsType>
-    // newPostText: string
 }
 
 type mapDispatchToPropsType = {
     addPost: (newPostText:string) => void
 }
 
-export type MyPostsPropsType = mapStateToPropsType | mapDispatchToPropsType
+// export type MyPostsPropsType = mapStateToPropsType | mapDispatchToPropsType
 
 
 let mapStateToProps = (state: AllStateType): mapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
-        // newPostText: state.profilePage.newPostText
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
