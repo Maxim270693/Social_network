@@ -15,8 +15,6 @@ import {AllStateType} from "./redux/redux-store";
 import {initializeApp} from "./redux/app-reducer";
 import {compose} from "redux";
 import {Preloader} from "./components/common/preloader/Preloader";
-import {ReactComponent} from "*.svg";
-
 
 
 type MapStateToPropsType = {
@@ -24,7 +22,6 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    // getAuthUserData:() => void
     initializeApp: () => void
 }
 

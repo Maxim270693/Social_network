@@ -61,8 +61,8 @@ export const getAuthUserData = () => (dispatch: ThunkDispatch<AllStateType, unkn
             }
         })
 }
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
 
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
@@ -73,6 +73,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
             }
         })
 }
+
 export const logout = () => (dispatch: ThunkDispatch<AllStateType, unknown, ActionType>) => {
     authAPI.logout()
         .then((response) => {
