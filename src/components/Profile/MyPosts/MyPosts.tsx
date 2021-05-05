@@ -21,7 +21,7 @@ type FormDataType = {
     newPostText: string
 }
 
-function MyPosts(props: postType) {
+const MyPosts = React.memo((props: postType) => {
 
     let postsElement = props.posts.map(p => <Post message={p.message} key={p.id} like={p.like}/>)
 
@@ -34,14 +34,14 @@ function MyPosts(props: postType) {
         <div className={s.postsBlock}>
             <h3>my posts</h3>
             <div className={s.item}>
-                <AddMessageFormRedux  onSubmit={onSubmit} {...props}/>
+                <AddMessageFormRedux onSubmit={onSubmit} {...props}/>
             </div>
             <div className={s.posts}>
                 {postsElement}
             </div>
         </div>
     );
-}
+});
 
 const maxLength10 = maxLengthCreator(10)
 
