@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     addPostActionCreator,
-    ChangeNewTextActionCreator,
+    ChangeNewTextActionCreator, deletePostActionCreator,
     setStatus,
     setUserProfile,
 } from "../../../redux/profile-reducer";
@@ -25,6 +25,7 @@ import {initializedSuccess} from "../../../redux/app-reducer";
 
 export type ActionType =
     ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof deletePostActionCreator>
     | ReturnType<typeof ChangeNewTextActionCreator>
     | ReturnType<typeof SendMessageCreator>
     | ReturnType<typeof followSuccess>
@@ -47,8 +48,6 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     addPost: (newPostText:string) => void
 }
-
-// export type MyPostsPropsType = mapStateToPropsType | mapDispatchToPropsType
 
 
 let mapStateToProps = (state: AllStateType): mapStateToPropsType => {

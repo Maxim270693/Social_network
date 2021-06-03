@@ -4,12 +4,13 @@ import {profileAPI, userAPI} from "../api/api";
 import {PostsType} from "../components/Profile/MyPosts/MyPosts";
 
 
+const DELETE_POST = 'DELETE-POST'
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
-type PostPropsType = {
+export type PostPropsType = {
     id: number
     message: string
     like: number
@@ -17,7 +18,6 @@ type PostPropsType = {
 
 type initialStatePropsType = {
     posts: Array<PostPropsType>
-    //newPostText: string
     profile: null | ProfileType
     status: string
 }
@@ -57,6 +57,8 @@ let initialState = {
 
 const profileReducer = (state: initialStatePropsType = initialState, action: ActionType): initialStatePropsType => {
     switch (action.type) {
+        case DELETE_POST:
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
         case ADD_POST: {
             const newPost: PostsType = {
                 id: 5,
@@ -77,6 +79,7 @@ const profileReducer = (state: initialStatePropsType = initialState, action: Act
 
 }
 
+export const deletePostActionCreator = (postId: number) => ({type: DELETE_POST,postId} as const)
 export const addPostActionCreator = (newPostText:string) => ({type: ADD_POST,newPostText}  as const)
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
