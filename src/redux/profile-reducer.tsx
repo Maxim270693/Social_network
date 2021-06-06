@@ -2,6 +2,8 @@ import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {Dispatch} from "redux";
 import {profileAPI, userAPI} from "../api/api";
 import {PostsType} from "../components/Profile/MyPosts/MyPosts";
+import {ThunkDispatch} from "redux-thunk";
+import {AllStateType} from "./redux-store";
 
 
 const DELETE_POST = 'DELETE-POST'
@@ -42,7 +44,7 @@ export type ProfileType = {
     "lookingForAJobDescription": string,
     "fullName": string,
     "userId": number,
-    "photos":PhotosType
+    "photos": PhotosType
 }
 
 
@@ -65,7 +67,7 @@ const profileReducer = (state: initialStatePropsType = initialState, action: Act
                 message: action.newPostText,
                 like: 32
             };
-            return {...state,posts: [...state.posts,newPost] }
+            return {...state, posts: [...state.posts, newPost]}
         }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
@@ -79,30 +81,24 @@ const profileReducer = (state: initialStatePropsType = initialState, action: Act
 
 }
 
-export const deletePostActionCreator = (postId: number) => ({type: DELETE_POST,postId} as const)
-export const addPostActionCreator = (newPostText:string) => ({type: ADD_POST,newPostText}  as const)
+export const deletePostActionCreator = (postId: number) => ({type: DELETE_POST, postId} as const)
+export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 
-export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
-    userAPI.getProfile(userId)
-        .then(response => {
-        dispatch(setUserProfile(response.data))
-    })
+export const getUserProfile = (userId: number) => async (dispatch: ThunkDispatch<AllStateType, unknown, ActionType>) => {
+    let response = await userAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data))
 }
-export const getStatus = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-        dispatch(setStatus(response.data))
-    })
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatus(response.data))
 }
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if(response.data.resultCode === 0) {
-            dispatch(setStatus(status))
-        }
-    })
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
 }
 export const ChangeNewTextActionCreator = (newText: string) => ({type: CHANGE_NEW_TEXT, newText: newText} as const)
 

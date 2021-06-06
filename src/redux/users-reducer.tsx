@@ -1,6 +1,8 @@
 import {ActionType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {userAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {ThunkDispatch} from "redux-thunk";
+import {AllStateType} from "./redux-store";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -94,7 +96,7 @@ export const usersReducer = (state: initialStatePropsType = initialState, action
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
                     : state.followingInProgress.filter(id => id !== action.userId)
-    }
+            }
 
         default:
             return state
@@ -104,52 +106,50 @@ export const usersReducer = (state: initialStatePropsType = initialState, action
 
 export const followSuccess = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowSuccess = (userId: number) => ({type: UNFOLLOW, userId} as const)
-export const setUsers = (users: usersType[]) => ({type: SET_USERS, users} as const)  // actionCreator function которая возвращает объект action
+export const setUsers = (users: usersType[]) => ({type: SET_USERS, users} as const)
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 export const setTotalUsersCount = (totalUsersCount: number) => ({
     type: SET_TOTAL_USERS_COUNT,
     count: totalUsersCount
 } as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
-export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const)
+export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    isFetching,
+    userId
+} as const)
 
 
-
-export const getUsers = (currentPage: number,pageSize: number) => {
-    return (dispatch: Dispatch) => {
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(currentPage))
 
-        userAPI.getUsers(currentPage,pageSize).then(data => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUsers(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))
-        })
+        let res = await userAPI.getUsers(currentPage, pageSize)
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(res.items))
+        dispatch(setTotalUsersCount(res.totalCount))
     }
 }
 
+const followUnFollowFlow = async (dispatch: ThunkDispatch<AllStateType, unknown, ActionType>, userId: number, apiMethod: any, actionCreator: any) => {
+    dispatch(toggleFollowingProgress(true, userId))
+    let response = await apiMethod(userId)
+
+    if (response.data.resultCode === 0) {
+        dispatch(actionCreator(userId))
+    }
+    dispatch(toggleFollowingProgress(false, userId))
+}
+
 export const follow = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toggleFollowingProgress(true,userId))
-        userAPI.follow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(followSuccess(userId))
-                }
-                dispatch(toggleFollowingProgress(false,userId))
-            })
+    return async (dispatch: Dispatch) => {
+        followUnFollowFlow(dispatch, userId, userAPI.follow.bind(userAPI), followSuccess)
     }
 }
 
 export const unfollow = (userId: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toggleFollowingProgress(true,userId))
-        userAPI.unfollow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(unfollowSuccess(userId))
-                }
-                dispatch(toggleFollowingProgress(false,userId))
-            })
+    return async (dispatch: Dispatch) => {
+        followUnFollowFlow(dispatch, userId, userAPI.unfollow.bind(userAPI), unfollowSuccess)
     }
 }

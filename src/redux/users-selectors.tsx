@@ -6,7 +6,7 @@ export const getUsersPage = (state: AllStateType) => {
 }
 
 export const getUsersSuperSelector = createSelector(getUsersPage,(users) => {
-    return users.filter(() => {})
+    return users
 })
 
 export const getUsersPageSize = (state: AllStateType) => {
